@@ -21,19 +21,30 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'usuarios';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['nome', 'email', 'senha'];
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['senha', 'remember_token'];
+
+    public function getAuthPassword() {
+        return $this->senha;
+    }
+
+    public function isAdmin(){
+      if($this->admin == 'Y'){
+        return true;
+      }
+      return false;
+    }
 }
