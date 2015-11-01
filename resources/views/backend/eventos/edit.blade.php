@@ -105,7 +105,9 @@
             <p class="help-block">O tamanho da imagem não deve exceder 1MB.</p>
         </div>
         <div class="form-group">
+            @if(!empty($evento->imagem))
             <img src="{{ asset('uploadsDoUsuario/')}}/{{$evento->imagem}}" ></img>
+            @endif
         </div>
       </div><!-- /.box-body -->
       <div class="box-footer">

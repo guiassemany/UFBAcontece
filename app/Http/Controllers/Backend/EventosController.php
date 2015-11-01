@@ -36,10 +36,6 @@ class EventosController extends Controller
      */
     public function store(StoreEventoRequest $request)
     {
-      $file = $request->file('imagem');
-      $filename  = time() . '.' . $file->getClientOriginalExtension();
-      $path = public_path('uploadsDoUsuario/' . $filename);
-      Image::make($file->getRealPath())->resize('200','200')->save($path);
 
       $evento = new Evento(array(
         'categoria_id' => $request->get('categoria_id'),
@@ -49,8 +45,7 @@ class EventosController extends Controller
         'data_inicio'  => $request->get('data_inicio'),
         'data_fim'  => $request->get('data_fim'),
         'endereco'  => $request->get('endereco'),
-        'ativo'  => $request->get('ativo'),
-        'imagem'  => $filename
+        'ativo'  => $request->get('ativo')
       ));
 
       if(!$evento->save()){
@@ -58,8 +53,18 @@ class EventosController extends Controller
         ->with('status', 'Erro ao cadastrar Evento.');
       }
 
+      //Trata e salva a imagem nova
+      $file = $request->file('imagem');
+      $filename  = time() . $evento->id .'.' . $file->getClientOriginalExtension();
+      $path = public_path('uploadsDoUsuario/' . $filename);
+      Image::make($file->getRealPath())->resize('600','400')->save($path);
+
+      $evento->imagem = $filename;
+
+      $evento->save();
+
       return redirect()->action('Backend\EventosController@index')
-      ->with('status', 'Evento '. $request->get('titulo') .' cadastrado.');
+      ->with('status', 'Evento '. $evento->titulo .' cadastrado.');
 
 
 
@@ -101,12 +106,17 @@ class EventosController extends Controller
         $evento->endereco         = $request->input('endereco');
         $evento->ativo            = $request->input('ativo');
 
-        //Trata a imagem
+        //Deleta a imagem antiga se houver
+        if(!empty($evento->imagem)){
+            unlink('uploadsDoUsuario'.DIRECTORY_SEPARATOR.$evento->imagem);
+        }
+
+        //Trata e salva a imagem nova
         if ($request->hasFile('imagem')) {
           $file = $request->file('imagem');
-          $filename  = time() . '.' . $file->getClientOriginalExtension();
+          $filename  = time() . $evento->id .'.' . $file->getClientOriginalExtension();
           $path = public_path('uploadsDoUsuario/' . $filename);
-          Image::make($file->getRealPath())->resize('200','200')->save($path);
+          Image::make($file->getRealPath())->resize('600','400')->save($path);
           $evento->imagem = $filename;
         }
 
@@ -125,9 +135,16 @@ class EventosController extends Controller
     public function destroy($id)
     {
       $evento = Evento::findOrFail($id);
+
+      //Deleta a imagem se houver
+      if(!empty($evento->imagem)){
+          unlink('uploadsDoUsuario'.DIRECTORY_SEPARATOR.$evento->imagem);
+      }
+
       if($evento->delete()){
         return redirect()->action('Backend\EventosController@index')
         ->with('status', 'Evento '. $evento->titulo.' excluído.');
       }
     }
+
 }
