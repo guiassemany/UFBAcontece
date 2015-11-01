@@ -7,16 +7,16 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('plugins/ionicons/ionicons.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="{{ asset('dist/css/skins/_all-skins.min.css') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +31,7 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="{{ action('BackendController@index') }}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>U</b>FBA</span>
           <!-- logo for regular state and mobile devices -->
@@ -82,13 +82,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="../../dist/img/usuario.jpg" class="user-image" alt="User Image">
+                  <img src="{{ asset('dist/img/usuario.jpg') }}" class="user-image" alt="User Image">
                   <span class="hidden-xs">{{ Auth::user()->nome }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="../../dist/img/usuario.jpg" class="img-circle" alt="User Image">
+                    <img src="{{ asset('dist/img/usuario.jpg') }}" class="img-circle" alt="User Image">
                     <p>
                       {{ Auth::user()->nome }}
                       @if(Auth::user()->isAdmin())
@@ -102,7 +102,7 @@
                       <a href="#" class="btn btn-default btn-flat">Perfil</a>
                     </div>
                     <div class="pull-right">
-                      <a href="{{ action('Admin\Auth\AuthController@getLogout') }}" class="btn btn-default btn-flat">Sair</a>
+                      <a href="{{ action('Backend\Auth\AuthController@getLogout') }}" class="btn btn-default btn-flat">Sair</a>
                     </div>
                   </li>
                 </ul>
@@ -121,7 +121,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="../../dist/img/usuario.jpg" class="img-circle" alt="User Image">
+              <img src="{{ asset('dist/img/usuario.jpg') }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
               <p>{{ Auth::user()->nome }}</p>
@@ -132,19 +132,31 @@
           <ul class="sidebar-menu">
             <li class="header">MENU</li>
             <li class="treeview">
-              <a href="{{ action('AdminController@index') }}">
+              <a href="{{ action('BackendController@index') }}">
                 <i class="fa fa-dashboard"></i> <span>Painel inicial</span>
               </a>
             </li>
+            @if(Auth::user()->isAdmin())
+            <li class="header">Menu do Administrador</li>
             <li class="treeview">
-              <a href="{{ action('EventosController@index') }}">
+              <a href="{{ action('Backend\EventosController@index') }}">
                 <i class="fa fa-calendar"></i> <span>Eventos</span>
               </a>
             </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Configurações Básicas</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ action('Backend\DepartamentosController@index') }}"><i class="fa fa-table"></i> Departamentos</a></li>
+                <li><a href="{{ action('Backend\CategoriasController@index') }}"><i class="fa fa-table"></i> Categorias</a></li>
+              </ul>
+            </li>
+            @endif
         </section>
         <!-- /.sidebar -->
       </aside>
-            
+
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
               @yield('conteudo')
@@ -169,7 +181,8 @@
     <script src="{{ asset('plugins/fastclick/fastclick.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/app.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('dist/js/demo.js') }}"></script>
+
+    @yield('scriptsExtra')
+
   </body>
 </html>

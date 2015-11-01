@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Backend\Auth;
 
 use App\User;
 use Validator;
@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Lang;
 class AuthController extends Controller
 {
 
-    protected $loginPath = 'admin/auth/login';
+    protected $loginPath = 'painel/auth/login';
     protected $redirectAfterLogout = '/';
-    protected $redirectTo = 'admin/';
+    protected $redirectTo = 'painel/';
 
     /*
     |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ class AuthController extends Controller
      */
     public function getLogin()
     {
-        return view('admin.auth.login');
+        return view('backend.auth.login');
     }
 
 
@@ -202,9 +202,9 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'nome' => $data['name'],
+            'nome' => $data['nome'],
             'email' => $data['email'],
-            'senha' => bcrypt($data['password']),
+            'senha' => bcrypt($data['senha']),
         ]);
     }
 }

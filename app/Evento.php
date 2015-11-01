@@ -17,5 +17,12 @@ class Evento extends Model
 
   public $timestamps = false;
 
+  public function categoria(){
+      return $this->belongsTo('App\Categoria');
+  }
+
+  public function departamento(){
+      return $this->belongsTo('App\Departamento');
+  }
 
 }

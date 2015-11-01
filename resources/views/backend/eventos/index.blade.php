@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('backend.layout.master')
 
 @section('conteudo')
 <!-- Content Header (Page header) -->
@@ -15,12 +15,20 @@
 
 <!-- Main content -->
 <section class="content">
+  @if (session('status'))
+  <div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4>	<i class="icon fa fa-check"></i> Sucesso!</h4>
+    {{ session('status') }}
+  </div>
+@endif
 
   <!-- Default box -->
   <div class="box">
     <div class="box-header with-border">
       <h3 class="box-title">Eventos</h3>
       <div class="box-tools pull-right">
+        <a href="{{ action('Backend\EventosController@create') }}"class="btn btn-sm btn-success">Cadastrar novo evento</a>
         <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
         <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
       </div>
@@ -30,6 +38,8 @@
               <table class="table table-hover">
                 <tbody><tr>
                   <th>Título</th>
+                  <th>Categoria</th>
+                  <th>Departamento</th>
                   <th>Data de Início</th>
                   <th>Data de Fim</th>
                   <th>Status</th>
@@ -38,6 +48,8 @@
                 @foreach($eventos as $evento)
                 <tr>
                   <td>{{ $evento->titulo }}</td>
+                  <td>{{ $evento->categoria->titulo }}</td>
+                  <td>{{ $evento->departamento->titulo }}</td>
                   <td>{{ $evento->present()->dataInicioFormatada }}</td>
                   <td>{{ $evento->present()->dataFimFormatada }}</td>
                   <td>
@@ -49,8 +61,8 @@
                   </td>
                   <td>
                     <a class="btn btn-success" href="#"><i class="fa fa-check-square "></i> Ativar</a>
-                    <a class="btn btn-warning" href="#"><i class="fa fa-pencil "></i> Editar</a>
-                    <a class="btn btn-danger" href="#"><i class="fa fa-trash-o "></i> Excluir</a>
+                    <a class="btn btn-warning" href="{{action('Backend\EventosController@edit', $evento->id)}}"><i class="fa fa-pencil "></i> Editar</a>
+                    <a class="btn btn-danger" href="{{action('Backend\EventosController@destroy', $evento->id)}}"><i class="fa fa-trash-o "></i> Excluir</a>
                   </td>
                 </tr>
                 @endforeach
@@ -59,7 +71,9 @@
             </div>
     </div><!-- /.box-body -->
     <div class="box-footer">
-      Eventos
+      <div class="pull-right">
+        {!! $eventos->render() !!}
+      </div>
     </div><!-- /.box-footer-->
   </div><!-- /.box -->
 
