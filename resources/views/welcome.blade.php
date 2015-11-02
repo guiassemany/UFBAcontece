@@ -8,7 +8,7 @@
 
 	<title>UFBAcontece</title>
 
-	<link rel="shortcut icon" href="{{ asset('landing/images/gt_favicon.png') }}">
+	<link rel="shortcut icon" href="{{ asset('landing/images/favicon.png') }}">
 
 	<!-- Bootstrap itself -->
 	<link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
