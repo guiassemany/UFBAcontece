@@ -61,14 +61,14 @@
             <div class="input-group-addon">
               <i class="fa fa-calendar"></i>
             </div>
-            <input type="text" name="data_inicio" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="{{ $evento->data_inicio }}">
+            <input type="text" id="datemask" name="data_inicio" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="{{ $evento->present()->dataInicioFormatada }}">
           </div> <!-- /.input group -->
             <label>Data de Fim:</label>
             <div class="input-group col-md-3">
               <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
               </div>
-              <input type="text" name="data_fim" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="{{ $evento->data_fim }}">
+              <input type="text" id="datemask" name="data_fim" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="{{ $evento->present()->dataFimFormatada }}">
           </div> <!-- /.input group -->
           <label>Endereço:</label>
           <div class="input-group col-md-3">
@@ -128,5 +128,16 @@
   $(function () {
     CKEDITOR.replace('editor1');
   });
+</script>
+<script>
+
+      $(function () {
+
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+      });
+
 </script>
 @endsection

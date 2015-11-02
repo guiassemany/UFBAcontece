@@ -82,7 +82,12 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{ asset('dist/img/usuario.jpg') }}" class="user-image" alt="User Image">
+                  @if(!empty(Auth::user()->foto))
+                    <img src="{{ asset('uploadsDoUsuario/perfil/')}}/{{Auth::user()->foto}}" class="user-image" alt="Foto do Perfil">
+                  @else
+                    <img src="{{ asset('dist/img/usuario.jpg') }}" class="user-image" alt="Foto do Perfil">
+                  @endif
+
                   <span class="hidden-xs">{{ Auth::user()->nome }}</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -121,8 +126,13 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="{{ asset('dist/img/usuario.jpg') }}" class="img-circle" alt="User Image">
+              @if(!empty(Auth::user()->foto))
+                <img src="{{ asset('uploadsDoUsuario/perfil/')}}/{{Auth::user()->foto}}" class="img-circle" alt="Foto do Perfil">
+              @else
+                <img src="{{ asset('dist/img/usuario.jpg') }}" class="img-circle" alt="Foto do Perfil">
+              @endif
             </div>
+
             <div class="pull-left info">
               <p>{{ Auth::user()->nome }}</p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>

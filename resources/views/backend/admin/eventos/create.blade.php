@@ -56,19 +56,19 @@
             @endforeach
           </select>
         </div>
-          <label>Data de Início:</label>
+        <label>Data de Início:</label>
+        <div class="input-group col-md-3">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <input type="text" id="datemask" name="data_inicio" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="{{ old('data_inicio') }}">
+        </div> <!-- /.input group -->
+          <label>Data de Fim:</label>
           <div class="input-group col-md-3">
             <div class="input-group-addon">
               <i class="fa fa-calendar"></i>
             </div>
-            <input type="text" name="data_inicio" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="{{ old('data_inicio') }}">
-          </div> <!-- /.input group -->
-            <label>Data de Fim:</label>
-            <div class="input-group col-md-3">
-              <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <input type="text" name="data_fim" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="{{ old('data_fim') }}">
+            <input type="text" id="datemask" name="data_fim" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="{{ old('data_fim') }}">
           </div> <!-- /.input group -->
           <label>Endereço:</label>
           <div class="input-group col-md-3">
@@ -80,7 +80,7 @@
           <label>Descrição do Evento:</label>
           <div class="input-group col-md-12">
             <textarea id="editor1" name="descricao" rows="10" cols="80" style="visibility: hidden; display: none;" value="{{ old('descricao') }}">
-
+              {{ old('descricao') }}
             </textarea>
         </div> <!-- /.input group -->
         </div>
@@ -123,5 +123,16 @@
   $(function () {
     CKEDITOR.replace('editor1');
   });
+</script>
+<script>
+
+      $(function () {
+
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+      });
+
 </script>
 @endsection

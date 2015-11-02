@@ -13,7 +13,7 @@ class CategoriasController extends Controller
     public function index()
     {
         $categorias = Categoria::paginate(15);
-        return view('backend.categorias.index', compact('categorias'));
+        return view('backend.admin.categorias.index', compact('categorias'));
     }
 
     public function store(Request $request)
@@ -28,7 +28,7 @@ class CategoriasController extends Controller
     public function edit($id)
     {
         $categoria = Categoria::findOrFail($id);
-        return view('backend.categorias.edit', compact('categoria'));
+        return view('backend.admin.categorias.edit', compact('categoria'));
     }
 
     public function update(Request $request, $id)

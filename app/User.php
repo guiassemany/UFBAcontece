@@ -47,4 +47,13 @@ class User extends Model implements AuthenticatableContract,
       }
       return false;
     }
+
+    public function curso(){
+      return $this->belongsTo('App\Curso');
+    }
+
+    public function unidade(){
+      return $this->belongsTo('App\Unidade');
+    }
+
 }

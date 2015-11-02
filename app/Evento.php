@@ -25,4 +25,13 @@ class Evento extends Model
       return $this->belongsTo('App\Departamento');
   }
 
+  public function usuario(){
+      return $this->belongsTo('App\User');
+  }
+
+  public function comentarios()
+    {
+        return $this->hasMany('App\Comentario');
+    }
+
 }

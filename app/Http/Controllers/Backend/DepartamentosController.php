@@ -14,7 +14,7 @@ class DepartamentosController extends Controller
     public function index()
     {
         $departamentos = Departamento::paginate(15);
-        return view('backend.departamentos.index', compact('departamentos'));
+        return view('backend.admin.departamentos.index', compact('departamentos'));
     }
 
     public function store(Request $request)
@@ -29,7 +29,7 @@ class DepartamentosController extends Controller
     public function edit($id)
     {
         $departamento = Departamento::findOrFail($id);
-        return view('backend.departamentos.edit', compact('departamento'));
+        return view('backend.admin.departamentos.edit', compact('departamento'));
     }
 
     public function update(Request $request, $id)
