@@ -60,7 +60,6 @@
                     @endif
                   </td>
                   <td>
-                    <a class="btn btn-success" href="#"><i class="fa fa-check-square "></i> Ativar</a>
                     <a class="btn btn-warning" href="{{action('Backend\EventosController@edit', $evento->id)}}"><i class="fa fa-pencil "></i> Editar</a>
                     <a class="btn btn-danger" href="{{action('Backend\EventosController@destroy', $evento->id)}}"><i class="fa fa-trash-o "></i> Excluir</a>
                   </td>

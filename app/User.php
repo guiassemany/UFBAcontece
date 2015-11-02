@@ -56,4 +56,8 @@ class User extends Model implements AuthenticatableContract,
       return $this->belongsTo('App\Unidade');
     }
 
+    public function eventos(){
+      return $this->hasMany('App\Evento', 'usuario_id');
+    }
+
 }

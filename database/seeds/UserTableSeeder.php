@@ -21,30 +21,40 @@ class UserTableSeeder extends Seeder
           'nome' => 'Guilherme Assemany',
           'email' => 'guilherme@ufbacontece.com',
           'senha' => bcrypt('123'),
+          'curso_id' => 15,
+          'unidade_id' => 1,
       ]);
 
       DB::table('usuarios')->insert([
           'nome' => 'Fran Almeida',
           'email' => 'fran@ufbacontece.com',
           'senha' => bcrypt('123'),
+          'curso_id' => 15,
+          'unidade_id' => 1,
       ]);
 
       DB::table('usuarios')->insert([
           'nome' => 'Edmilson Lima',
           'email' => 'edmilson@ufbacontece.com',
           'senha' => bcrypt('123'),
+          'curso_id' => 15,
+          'unidade_id' => 1,
       ]);
 
       DB::table('usuarios')->insert([
           'nome' => 'Monira Silva',
           'email' => 'monira@ufbacontece.com',
           'senha' => bcrypt('123'),
+          'curso_id' => 15,
+          'unidade_id' => 1,
       ]);
 
       DB::table('usuarios')->insert([
           'nome' => 'Suzanne Loures',
           'email' => 'suzanne@ufbacontece.com',
           'senha' => bcrypt('123'),
+          'curso_id' => 15,
+          'unidade_id' => 1,
       ]);
 
 

@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use App\Curso;
+use App\Unidade;
 
 class AuthController extends Controller
 {
@@ -206,5 +208,37 @@ class AuthController extends Controller
             'email' => $data['email'],
             'senha' => bcrypt($data['senha']),
         ]);
+    }
+
+
+    public function getRegister()
+    {
+        $cursos = Curso::lists('titulo', 'id');
+        $unidades = Unidade::lists('titulo', 'id');
+        return view('backend.auth.cadastro', compact('cursos', 'unidades'));
+    }
+
+    public function postRegister(Request $request)
+    {
+        /*$validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }*/
+
+        $usuario = new User;
+        $usuario->nome = $request->get('nome');
+        $usuario->email = $request->get('email');
+        $usuario->senha = bcrypt($request->get('senha'));
+        $usuario->curso_id = $request->get('curso_id');
+        $usuario->unidade_id = $request->get('unidade_id');
+
+        $usuario->save();
+
+        Auth::login($usuario);
+
+        return redirect($this->redirectPath());
     }
 }

@@ -17,6 +17,11 @@ class EventoPresenter extends Presenter {
         return Carbon::parse($this->data_fim)->format('d/m/Y');
     }
 
+    public function createdAtFormatada()
+    {
+        return Carbon::parse($this->created_at)->format('d/m/Y \à\s H:i:s');
+    }
+
     public function status(){
 
       if($this->ativo == 'N'){

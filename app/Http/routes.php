@@ -18,6 +18,7 @@ Route::group(['prefix' => 'painel'], function () {
 
       //Controller do Backend
       Route::get('/', 'BackendController@index');
+      Route::get('/eventosCalendario', 'BackendController@eventosCalendario');
 
       //Perfil
       Route::post('/perfil/editar', 'Backend\UserController@update');
@@ -25,6 +26,10 @@ Route::group(['prefix' => 'painel'], function () {
       //Comentários
       Route::post('/comentario/{eventoId}/novo', 'Backend\ComentariosController@store');
       Route::get('/comentario/exlcuir/{id}', 'Backend\ComentariosController@destroy');
+
+      //Comentários
+      Route::get('/participante/{eventoId}/confirmar', 'Backend\ParticipantesController@store');
+      Route::get('/participante/{eventoId}/cancelar', 'Backend\ParticipantesController@destroy');
 
       //Faz o Logout
       Route::get('auth/logout', 'Backend\Auth\AuthController@getLogout');
@@ -63,6 +68,10 @@ Route::group(['prefix' => 'painel'], function () {
     {
       Route::get('auth/login', 'Backend\Auth\AuthController@getLogin');
       Route::post('auth/login', 'Backend\Auth\AuthController@postLogin');
+
+      // Rotas de Cadastro
+      Route::get('auth/cadastrar', 'Backend\Auth\AuthController@getRegister');
+      Route::post('auth/cadastrar', 'Backend\Auth\AuthController@postRegister');
     });
 
 

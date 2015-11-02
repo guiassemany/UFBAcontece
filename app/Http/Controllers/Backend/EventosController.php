@@ -12,6 +12,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEventoRequest;
 use Carbon\Carbon;
+use Auth;
 
 class EventosController extends Controller
 {
@@ -56,7 +57,8 @@ class EventosController extends Controller
         'data_inicio'  => $dataInicioFormatada,
         'data_fim'  => $dataFimFormatada,
         'endereco'  => $request->get('endereco'),
-        'ativo'  => $request->get('ativo')
+        'ativo'  => $request->get('ativo'),
+        'usuario_id'  => Auth::user()->id
       ));
 
       if(!$evento->save()){
