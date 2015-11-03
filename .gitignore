@@ -3,7 +3,9 @@
 Homestead.yaml
 Homestead.json
 .env
-/public/uploadsDoUsuario
+/public/uploadsDoUsuario/*.jpg
+/public/uploadsDoUsuario/perfil/*.jpg
+/public/uploadsDoUsuario/perfil/*.png
 
 *.iml
 
@@ -49,5 +51,3 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
-
-
