@@ -4,12 +4,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-// Registration routes...
-//Route::get('auth/register', 'Auth\AuthController@getRegister');
-//Route::post('auth/register', 'Auth\AuthController@postRegister');
-
-
 Route::group(['prefix' => 'painel'], function () {
 
     Route::group(['middleware' => 'auth'], function()
