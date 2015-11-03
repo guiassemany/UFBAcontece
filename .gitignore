@@ -5,7 +5,6 @@ Homestead.json
 .env
 /public/uploadsDoUsuario/*.jpg
 /public/uploadsDoUsuario/perfil/*.jpg
-/public/uploadsDoUsuario/perfil/*.png
 
 *.iml
 
