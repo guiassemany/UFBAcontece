@@ -21,6 +21,7 @@ class UserTableSeeder extends Seeder
           'nome' => 'Guilherme Assemany',
           'email' => 'guilherme@ufbacontece.com',
           'senha' => bcrypt('123'),
+          'admin' => 'Y',
           'curso_id' => 15,
           'unidade_id' => 1,
       ]);
@@ -29,6 +30,7 @@ class UserTableSeeder extends Seeder
           'nome' => 'Fran Almeida',
           'email' => 'fran@ufbacontece.com',
           'senha' => bcrypt('123'),
+          'admin' => 'Y',
           'curso_id' => 15,
           'unidade_id' => 1,
       ]);
@@ -37,6 +39,7 @@ class UserTableSeeder extends Seeder
           'nome' => 'Edmilson Lima',
           'email' => 'edmilson@ufbacontece.com',
           'senha' => bcrypt('123'),
+          'admin' => 'Y',
           'curso_id' => 15,
           'unidade_id' => 1,
       ]);
@@ -45,6 +48,7 @@ class UserTableSeeder extends Seeder
           'nome' => 'Monira Silva',
           'email' => 'monira@ufbacontece.com',
           'senha' => bcrypt('123'),
+          'admin' => 'Y',
           'curso_id' => 15,
           'unidade_id' => 1,
       ]);
@@ -53,6 +57,7 @@ class UserTableSeeder extends Seeder
           'nome' => 'Suzanne Loures',
           'email' => 'suzanne@ufbacontece.com',
           'senha' => bcrypt('123'),
+          'admin' => 'Y',
           'curso_id' => 15,
           'unidade_id' => 1,
       ]);
