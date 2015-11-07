@@ -14,6 +14,12 @@ Route::group(['prefix' => 'painel'], function () {
       Route::get('/', 'BackendController@index');
       Route::get('/eventosCalendario', 'BackendController@eventosCalendario');
 
+      //Detalhe do Evento
+      Route::get('/evento/{eventoId}', 'BackendController@detalharEvento');
+
+      //API Gráfico Participantes x Cursos
+      Route::get('/evento/{eventoId}/pxc', 'BackendController@participantesByCurso');
+
       //Perfil
       Route::post('/perfil/editar', 'Backend\UserController@update');
 

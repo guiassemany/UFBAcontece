@@ -10,7 +10,7 @@
         @else
           <img class="img-circle" src="{{ asset('dist/img/usuario.jpg')}}" alt="Foto do Perfil">
         @endif
-        <span class="username"><a href="#">{{ $evento->titulo }}</a></span>
+        <span class="username"><a href="{{ action('BackendController@detalharEvento', $evento->id) }}">{{ $evento->titulo }}</a></span>
         <span class="description">Publicado por {{ empty($evento->usuario_id) ? 'UFBAcontece' : $evento->usuario->nome }} em {{ $evento->present()->createdAtFormatada }}</span>
       </div><!-- /.user-block -->
       <div class="box-tools">

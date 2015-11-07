@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Curso;
 use App\Unidade;
 use App\Evento;
+use App\User as Usuario;
 
 use Response;
 
@@ -35,5 +36,22 @@ class BackendController extends Controller
     public function eventos()
     {
         return view('backend.dashboard.eventos');
+    }
+
+    public function detalharEvento($eventoId)
+    {
+        $evento = Evento::findOrFail($eventoId);
+        return view('backend.evento.detalhe', compact('evento'));
+    }
+
+    public function participantesByCurso($eventoId)
+    {
+
+      $evento = Evento::findOrFail($eventoId);
+      foreach($evento->participantes as $participante)
+      {
+        return $usuario = Usuario::findOrFail($participante->usuario_id);
+      }
+
     }
 }
