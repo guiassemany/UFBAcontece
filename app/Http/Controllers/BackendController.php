@@ -11,7 +11,7 @@ use App\Curso;
 use App\Unidade;
 use App\Evento;
 use App\User as Usuario;
-
+use DB;
 use Response;
 
 class BackendController extends Controller
@@ -21,37 +21,37 @@ class BackendController extends Controller
         $cursos = Curso::lists('titulo', 'id');
         $unidades = Unidade::lists('titulo', 'id');
         $eventos = Evento::where('ativo', 'Y')->with('usuario', 'comentarios.usuario')->orderBy('created_at', 'desc')->get();
-        //dd($eventos);
         return view('backend.dashboard.index', compact('cursos','unidades', 'eventos'));
     }
 
-    public function eventosCalendario(){
+    public function eventosCalendario()
+    {
       $eventos = Evento::all()->where('ativo', 'Y');
-      //dd($eventos);
-      //exit;
       return Response::json($eventos);
-      //return response()->json($eventos);
     }
 
     public function eventos()
     {
-        return view('backend.dashboard.eventos');
+      return view('backend.dashboard.eventos');
     }
 
     public function detalharEvento($eventoId)
     {
-        $evento = Evento::findOrFail($eventoId);
-        return view('backend.evento.detalhe', compact('evento'));
+      $evento = Evento::findOrFail($eventoId);
+      $publicacoes = $evento->publicacoes()->orderby('created_at', 'desc')->get();
+      return view('backend.evento.detalhe', compact('evento', 'publicacoes'));
     }
 
     public function participantesByCurso($eventoId)
     {
-
-      $evento = Evento::findOrFail($eventoId);
-      foreach($evento->participantes as $participante)
-      {
-        return $usuario = Usuario::findOrFail($participante->usuario_id);
-      }
+      $participantes = DB::table('eventos_participantes')
+            ->join('usuarios', 'usuarios.id', '=', 'eventos_participantes.usuario_id')
+            ->join('cursos', 'cursos.id', '=', 'usuarios.curso_id')
+            ->select(DB::raw('count(*) as numero'), 'cursos.titulo')
+            ->where('eventos_participantes.evento_id', $eventoId)
+            ->groupBy('cursos.id')
+            ->get();
+            return $participantes;
 
     }
 }
