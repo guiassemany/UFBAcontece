@@ -12,13 +12,25 @@ Route::group(['prefix' => 'painel'], function () {
 
       //Controller do Backend
       Route::get('/', 'BackendController@index');
-      Route::get('/eventosCalendario', 'BackendController@eventosCalendario');
+        //Rota para chamada AJAX - Pegar todos os eventos
+        Route::get('/eventosCalendario', 'BackendController@eventosCalendario');
 
       //Detalhe do Evento
       Route::get('/evento/{eventoId}', 'BackendController@detalharEvento');
 
       //Publicações em um evento
       Route::post('/evento/{eventoId}/criarPublicacao', 'Backend\EventosPublicacoesController@store');
+      Route::get('/evento/{eventoId}/excluirPublicacao', 'Backend\EventosPublicacoesController@destroy');
+
+      //Curtir Publicações em um evento
+      Route::get('/evento/atual/curtirPublicacao/{publicacaoId}', 'Backend\EventosPublicacoesCurtidasController@store');
+      Route::get('/evento/atual/excluirCurtida/{publicacaoId}', 'Backend\EventosPublicacoesCurtidasController@destroy');
+
+      //Agenda do evento
+      Route::post('/evento/{eventoId}/adicionarAgenda', 'Backend\EventosAgendasController@store');
+      Route::get('/evento/atual/excluirAgenda/{agendaId}', 'Backend\EventosAgendasController@destroy');
+        //Rota para chamada AJAX - Pegar atividades do evento
+        Route::get('/evento/{eventoId}/AtividadesAgenda', 'Backend\EventosAgendasController@listarAtividadesAgenda');
 
       //API Gráfico Participantes x Cursos
       Route::get('/evento/{eventoId}/pxc', 'BackendController@participantesByCurso');

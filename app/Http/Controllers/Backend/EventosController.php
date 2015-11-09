@@ -71,7 +71,7 @@ class EventosController extends Controller
         $file = $request->file('imagem');
         $filename  = time() . $evento->id .'.' . $file->getClientOriginalExtension();
         $path = public_path('uploadsDoUsuario/' . $filename);
-        Image::make($file->getRealPath())->resize('600','400')->save($path);
+        Image::make($file->getRealPath())->fit('607','190')->save($path);
         $evento->imagem = $filename;
       }
 
@@ -141,7 +141,7 @@ class EventosController extends Controller
           $file = $request->file('imagem');
           $filename  = time() . $evento->id .'.' . $file->getClientOriginalExtension();
           $path = public_path('uploadsDoUsuario/' . $filename);
-          Image::make($file->getRealPath())->resize('600','400')->save($path);
+          Image::make($file->getRealPath())->fit('607','190')->save($path);
           $evento->imagem = $filename;
         }
 

@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/fullcalendar.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/fullcalendar.print.css') }}" media="print">
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker-bs3.css') }}">
 @endsection
 
 @section('conteudo')
@@ -25,16 +26,18 @@
             <div class="col-md-8">
               <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-black" style="background: url({{ asset('uploadsDoUsuario/')}}/{{$evento->imagem}}) no-repeat center center fixed; -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;">
+                <div class="widget-user-header bg-black"
+                style="background: url({{ asset('uploadsDoUsuario/')}}/{{$evento->imagem}}) no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                height:190px;
+                ">
                   <!-- <h3 class="widget-user-username">{{$evento->titulo}}</h3>
                   <h5 class="widget-user-desc">{{$evento->endereco}}</h5> -->
                 </div>
-                <div class="widget-user-image">
-                  <img class="img-circle" src="{{ asset('uploadsDoUsuario/perfil/')}}/{{$evento->usuario->foto}}" alt="Foto do perfil">
-                </div>
+
                 <div class="box-footer">
                   <div class="row">
                     <div class="col-sm-4 border-right">
@@ -51,8 +54,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-4">
                       <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">Curtidas</span>
+                        <h5 class="description-header">Data de Início</h5>
+                          <span class="description-text">{{ $evento->present()->dataInicioFormatada }}</span>
                       </div><!-- /.description-block -->
                     </div><!-- /.col -->
                   </div><!-- /.row -->
@@ -72,12 +75,18 @@
                   <li class="{{ session('aba') == 'local' ? 'active' : '' }}">
                     <a href="#local" data-toggle="tab" aria-expanded="false">Local</a>
                   </li>
+                  @if(Auth::user()->donoDoEventoOuAdmin($evento->id))
+                  <li class="{{ session('aba') == 'admAgenda' ? 'active' : '' }}">
+                    <a href="#admAgenda" data-toggle="tab" aria-expanded="false">Administrar Agenda do Evento</a>
+                  </li>
+                  @endif
                 </ul>
                 <div class="tab-content">
                   @include('backend.evento.sobre')
                   @include('backend.evento.publicacoes')
                   @include('backend.evento.agenda')
                   @include('backend.evento.local')
+                  @include('backend.evento.admAgenda')
                 </div><!-- /.tab-content -->
               </div><!-- /.nav-tabs-custom -->
             </div><!-- /.col -->
@@ -86,7 +95,7 @@
                 <span class="info-box-icon"><i class="fa fa-heart-o"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Presenças Confimadas</span>
-                  <span class="info-box-number">41,410</span>
+                  <span class="info-box-number">{{count($evento->participantes)}}</span>
                   <div class="progress">
                     <div class="progress-bar" style="width: 70%"></div>
                   </div>
@@ -98,8 +107,8 @@
               <div class="info-box bg-red">
                 <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Cometários</span>
-                  <span class="info-box-number">41,410</span>
+                  <span class="info-box-text">Publicações</span>
+                  <span class="info-box-number">{{ count($evento->publicacoes) }}</span>
                   <div class="progress">
                     <div class="progress-bar" style="width: 70%"></div>
                   </div>
@@ -112,7 +121,7 @@
                 <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Curtidas</span>
-                  <span class="info-box-number">41,410</span>
+                  <span class="info-box-number">4</span>
                   <div class="progress">
                     <div class="progress-bar" style="width: 70%"></div>
                   </div>
@@ -146,6 +155,7 @@
 <script src="http://maps.google.com/maps/api/js"></script>
 <script src="{{ asset('plugins/chartjs/Chart.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <script>
       $(function () {
 
@@ -157,7 +167,9 @@
         var pieChart = new Chart(pieChartCanvas);
 
         //Cores disponíveis para o gráfico
-        var cores = ['#4CAF50', '#03A9F4', '#673AB7', '#E91E63', '#FF9800', '#3F51B5', '#CDDC39'];
+        var cores = ['#4CAF50', '#03A9F4', '#673AB7', '#E91E63', '#FF9800', '#3F51B5', '#CDDC39', '#FF5722', '#FFEB3B', '#009688'];
+        var coresUsadasPrincipal = [];
+        var coresUsadasHighlight = [];
 
         //Inicio nos dados do gráfico
         var PieData = [];
@@ -169,12 +181,18 @@
            success: function(json){
              $.each(json, function(i, item) {
 
+                //Comecei e não terminar a fazer uma função para sempre gerar uma cor diferente!
+                coresUsadasPrincipal[i] = cores[Math.floor(Math.random()*cores.length)];
+                coresUsadasHighlight[i] = cores[Math.floor(Math.random()*cores.length)];
+
                 var parteGrafico = {
                     value: json[i].numero,
-                    color: cores[Math.floor(Math.random()*cores.length)], //"#f39c12", //yellow
-                    highlight: cores[Math.floor(Math.random()*cores.length)], //"#f39c12", //yellow,
+                    color: coresUsadasPrincipal[i], //"#f39c12", //yellow
+                    highlight: coresUsadasHighlight[i], //"#f39c12", //yellow,
                     label: json[i].titulo,
                 };
+
+                //console.log(coresUsadasPrincipal);
 
                 PieData.push(parteGrafico);
 
@@ -216,14 +234,15 @@
 
       //Requisição Ajax para criar instância do calendário
       $.ajax({
-         url: "/painel/eventosCalendario/",
+         url: "/painel/evento/{{$evento->id}}/AtividadesAgenda/",
          dataType: "json",
          success: function(json){
+           console.log(json);
            $.each(json, function(i, item) {
               var evento = {
                   title: json[i].titulo,
-                  start: json[i].data_inicio,
-                  end: json[i].data_fim,
+                  start: json[i].diaHora_inicio,
+                  end: json[i].diaHora_fim,
                   backgroundColor: cores[Math.floor(Math.random()*cores.length)], //"#f39c12", //yellow
                   borderColor: "#F5F5F5", //yellow
                   className: "calendarioNegrito"
@@ -239,6 +258,10 @@
                 right: 'agendaWeek,agendaDay'
               },
               defaultView: 'agendaWeek',
+              defaultDate: '{{$evento->data_inicio}}',
+              minTime: '07:00:00',
+              maxTime: '20:00:00',
+              allDaySlot: false,
               buttonText: {
                 today: 'Hoje',
                 month: 'Mês',
@@ -266,5 +289,13 @@
 </script>
 <script>
   //$(".textarea").wysihtml5();
+</script>
+<script>
+
+    $(function () {
+      //Date range picker with time picker
+      $('#dataHora').daterangepicker({timePicker: true, timePickerIncrement: 10, format: 'DD/MM/YYYY hh:mm A'});
+    });
+
 </script>
 @endsection

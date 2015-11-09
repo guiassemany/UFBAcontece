@@ -14,8 +14,8 @@ class CreateEventosPublicacoesComentariosTable extends Migration
     {
         Schema::create('eventos_publicacoes_comentarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('evento_id')->unsigned()->nullable();
-            $table->foreign('evento_id')->references('id')->on('eventos');
+            $table->integer('publicacao_id')->unsigned()->nullable();
+            $table->foreign('publicacao_id')->references('id')->on('eventos_publicacoes')->onDelete('cascade');
             $table->integer('usuario_id')->unsigned()->nullable();
             $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->text('comentario');

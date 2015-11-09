@@ -26,18 +26,33 @@
                 <li>
                   <i class="fa fa-comments bg-blue"></i>
                   <div class="timeline-item">
-                    <span class="time"><i class="fa fa-clock-o"></i> {{ $publicacao->created_at }}</span>
+                    <span class="time"><i class="fa fa-clock-o"></i> {{ $publicacao->present()->createdAtFormatada }}</span>
+                    <span class="time"><i class="fa fa-thumbs-o-up"></i> {{ count($publicacao->curtidas) }}</span>
                     <h3 class="timeline-header"><a href="#">{{ $publicacao->usuario->nome }}</a> publicou</h3>
                     <div class="timeline-body">
                       {{ $publicacao->texto }}
                     </div>
                     <div class="timeline-footer">
-                      <a class="btn btn-primary btn-xs">Curtir</a>
-                      <a class="btn btn-danger btn-xs">Excluir</a>
+                      @if($publicacao->usuarioCurtiu($publicacao->id))
+                        <a href="{{ action('Backend\EventosPublicacoesCurtidasController@destroy', $publicacao->id) }}" class="btn btn-default btn-xs">Não Curtir</a>
+                      @else
+                        <a href="{{ action('Backend\EventosPublicacoesCurtidasController@store', $publicacao->id) }}" class="btn btn-default btn-xs">Curtir</a>
+                      @endif
+                      @if(Auth::user()->donoDaPublicacao($publicacao->usuario_id))
+                        <a href="{{ action('Backend\EventosPublicacoesController@destroy', $publicacao->id) }}" class="btn btn-danger btn-xs">Excluir</a>
+                      @endif
                     </div>
                   </div>
                 </li>
                 @endforeach
+                @if(count($publicacoes) == 0)
+                <li>
+                  <div class="timeline-item">
+                    <h3 class="timeline-header">Ningúem publicou ainda! Seja o primeiro!</h3>
+                  </div>
+                </li>
+                @endif
+
                 <!-- END timeline item -->
                 <li>
                   <i class="fa fa-clock-o bg-gray"></i>

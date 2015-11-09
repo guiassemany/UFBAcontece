@@ -12,11 +12,6 @@ use App\EventoPublicacao;
 class EventosPublicacoesController extends Controller
 {
 
-    public function index()
-    {
-        //
-    }
-
     public function store(Request $request, $eventoId)
     {
       $publicacao = new EventoPublicacao();
@@ -29,13 +24,14 @@ class EventosPublicacoesController extends Controller
       ->with('aba', 'publicacoes');
     }
 
-    public function edit($id)
+    public function destroy($publicacaoId)
     {
-
+      $publicacao = EventoPublicacao::findOrFail($publicacaoId);
+      if($publicacao->delete()){
+        return redirect()->action('BackendController@detalharEvento', $publicacao->evento_id)
+        ->with('status', 'Publicação excluída.')
+        ->with('aba', 'publicacoes');
+      }
     }
 
-    public function destroy($id)
-    {
-        //
-    }
 }

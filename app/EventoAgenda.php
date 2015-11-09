@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laracasts\Presenter\PresentableTrait;
 
-class Participante extends Model
+class EventoAgenda extends Model
 {
+  use PresentableTrait;
 
-  protected $table = 'eventos_participantes';
+  protected $presenter = 'App\Presenters\EventoAgendaPresenter';
+
+  protected $table = 'eventos_agendas';
 
   protected $guarded = ['id'];
 
@@ -17,10 +21,4 @@ class Participante extends Model
   {
     return $this->belongsTo('App\Evento');
   }
-
-  public function usuario()
-  {
-    return $this->belongsTo('App\User');
-  }
-
 }

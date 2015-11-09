@@ -46,6 +46,11 @@ class Evento extends Model
     return $this->hasMany('App\EventoPublicacao');
   }
 
+  public function agendas()
+  {
+    return $this->hasMany('App\EventoAgenda');
+  }
+
   public function usuarioEstaParticipando($usuarioId, $eventoId)
   {
     $participante = Participante::where('usuario_id', $usuarioId)->where('evento_id', $eventoId)->first();

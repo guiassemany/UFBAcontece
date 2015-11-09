@@ -48,6 +48,20 @@ class User extends Model implements AuthenticatableContract,
       return false;
     }
 
+    public function donoDaPublicacao($publicacaoUsuarioId){
+      if($this->id == $publicacaoUsuarioId){
+        return true;
+      }
+      return false;
+    }
+
+    public function donoDoEventoOuAdmin($eventoUsuarioId){
+      if($this->id == $eventoUsuarioId || $this->isAdmin()){
+        return true;
+      }
+      return false;
+    }
+
     public function curso(){
       return $this->belongsTo('App\Curso');
     }

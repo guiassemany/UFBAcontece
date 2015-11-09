@@ -3,9 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laracasts\Presenter\PresentableTrait;
+
+use App\EventoPublicacaoCurtida;
+use Auth;
 
 class EventoPublicacao extends Model
 {
+  use PresentableTrait;
+
+  protected $presenter = 'App\Presenters\EventoPublicacaoPresenter';
+
   protected $table = 'eventos_publicacoes';
 
   protected $guarded = ['id'];
@@ -29,7 +37,15 @@ class EventoPublicacao extends Model
 
   public function curtidas()
   {
-    return $this->hasMany('App\EventoPublicacaoCurtida');
+    return $this->hasMany('App\EventoPublicacaoCurtida', 'publicacao_id');
   }
 
+  public function usuarioCurtiu($publicaoId)
+  {
+    $curtiu = EventoPublicacaoCurtida::where('usuario_id', Auth::user()->id)->where('publicacao_id', $publicaoId)->first();
+    if(empty($curtiu)){
+      return false;
+    }
+    return true;
+  }
 }
