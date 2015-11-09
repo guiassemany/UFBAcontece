@@ -11,12 +11,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-      /*DB::table('usuarios')->insert([
-          'nome' => str_random(10),
-          'email' => str_random(10).'@ufbacontece.com',
-          'senha' => bcrypt('secret'),
-      ]);*/
-
       DB::table('usuarios')->insert([
           'nome' => 'Guilherme Assemany',
           'email' => 'guilherme@ufbacontece.com',
@@ -62,6 +56,56 @@ class UserTableSeeder extends Seeder
           'unidade_id' => 1,
       ]);
 
+      DB::table('usuarios')->insert([
+          'nome' => 'João Silva',
+          'email' => 'jsilva@ufbacontece.com',
+          'senha' => bcrypt('123'),
+          'admin' => 'N',
+          'curso_id' => 3,
+          'unidade_id' => 2,
+      ]);
+
+      DB::table('usuarios')->insert([
+          'nome' => 'Alberto Costa',
+          'email' => 'acosta@ufbacontece.com',
+          'senha' => bcrypt('123'),
+          'admin' => 'N',
+          'curso_id' => 5,
+          'unidade_id' => 3,
+      ]);
+
+      DB::table('usuarios')->insert([
+          'nome' => 'Mariana Rios',
+          'email' => 'mrios@ufbacontece.com',
+          'senha' => bcrypt('123'),
+          'admin' => 'N',
+          'curso_id' => 5,
+          'unidade_id' => 2,
+      ]);
+
+      DB::table('usuarios')->insert([
+          'nome' => 'Amanda Benites',
+          'email' => 'abenites@ufbacontece.com',
+          'senha' => bcrypt('123'),
+          'admin' => 'N',
+          'curso_id' => 1,
+          'unidade_id' => 1,
+      ]);
+
+       //Gera usuários random com o Faker
+       $faker = Faker\Factory::create('pt_BR');
+
+       foreach(range(1,150) as $index)  
+        {  
+            DB::table('usuarios')->insert([
+                'nome' => $faker->firstName." ".$faker->lastName,  
+                'email' => $faker->unique()->email,  
+                'senha' => bcrypt('123'),  
+                'admin' => 'N',
+                'curso_id' => $faker->numberBetween($min = 1, $max = 15),
+                'unidade_id' => $faker->numberBetween($min = 1, $max = 6),  
+            ]);  
+        }
 
     }
 }
