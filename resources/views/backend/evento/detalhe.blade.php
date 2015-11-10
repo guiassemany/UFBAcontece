@@ -74,7 +74,7 @@
                   <li class="{{ session('aba') == 'local' ? 'active' : '' }}">
                     <a href="#local" data-toggle="tab" aria-expanded="false">Local</a>
                   </li>
-                  @if(Auth::user()->donoDoEventoOuAdmin($evento->id))
+                  @if(Auth::user()->donoDoEventoOuAdmin($evento->usuario->id))
                   <li class="{{ session('aba') == 'admAgenda' ? 'active' : '' }}">
                     <a href="#admAgenda" data-toggle="tab" aria-expanded="false">Administrar Agenda do Evento</a>
                   </li>
@@ -99,7 +99,7 @@
                     <div class="progress-bar" style="width: 70%"></div>
                   </div>
                   <span class="progress-description">
-                    Cresceu 70% em 30 dias
+                    <!-- Ainda vou implementar Cresceu 70% em 30 dias -->
                   </span>
                 </div>
               </div>
@@ -112,7 +112,7 @@
                     <div class="progress-bar" style="width: 70%"></div>
                   </div>
                   <span class="progress-description">
-                    Cresceu 70% em 30 dias
+                    <!-- Ainda vou implementar Cresceu 70% em 30 dias -->
                   </span>
                 </div>
               </div>

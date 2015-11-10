@@ -17,7 +17,7 @@ class EventosAgendasController extends Controller
 {
     public function listarAtividadesAgenda($eventoId)
     {
-      $atividades = EventoAgenda::all();
+      $atividades = EventoAgenda::where('evento_id', '=' ,$eventoId)->get();
       return Response::json($atividades);
     }
     public function store(Request $request, $eventoId)
