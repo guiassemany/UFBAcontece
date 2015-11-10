@@ -151,6 +151,16 @@
                 <i class="fa fa-dashboard"></i> <span>Painel inicial</span>
               </a>
             </li>
+            <li class="treeview">
+              <a href="{{ action('BackendController@eventosCriado') }}">
+                <i class="fa fa-user"></i> <span>Meus Eventos</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="{{ action('BackendController@eventosPresente') }}">
+                <i class="fa fa-heart"></i> <span>Presenças Confirmadas</span>
+              </a>
+            </li>
             @if(Auth::user()->isAdmin())
             <li class="header">Menu do Administrador</li>
             <li class="treeview">

@@ -12,8 +12,19 @@ Route::group(['prefix' => 'painel'], function () {
 
       //Controller do Backend
       Route::get('/', 'BackendController@index');
-        //Rota para chamada AJAX - Pegar todos os eventos
-        Route::get('/eventosCalendario', 'BackendController@eventosCalendario');
+
+      //Usuário - Controle de Publicação de eventos
+      Route::get('/meusEventos', 'BackendController@eventosCriado');
+      Route::get('/meusEventos/cadastrar', 'BackendController@cadastrarEvento');
+      Route::post('/meusEventos/cadastrar', 'BackendController@storeEventoUsuario');
+      //Route::get('/meusEventos/editar/{eventoId}', 'BackendController@editarEvento');
+      //Route::post('/meusEventos/editar/{eventoId}', 'BackendController@updateEventoUsuario');
+      Route::get('/meusEventos/excluir/{eventoId}', 'BackendController@excluirEvento');
+      Route::get('/eventosPresente', 'BackendController@eventosPresente');
+
+
+      //Rota para chamada AJAX - Pegar todos os eventos
+      Route::get('/eventosCalendario', 'BackendController@eventosCalendario');
 
       //Detalhe do Evento
       Route::get('/evento/{eventoId}', 'BackendController@detalharEvento');

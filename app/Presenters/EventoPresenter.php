@@ -25,10 +25,10 @@ class EventoPresenter extends Presenter {
     public function status(){
 
       if($this->ativo == 'N'){
-        return "Inativo";
+        return "Pendente de Aprovação";
       }
 
-      return "Ativo";
+      return "Aprovado e Ativo";
 
     }
 

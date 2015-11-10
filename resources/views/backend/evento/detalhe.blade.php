@@ -27,11 +27,10 @@
               <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-black"
-                style="background: url({{ asset('uploadsDoUsuario/')}}/{{$evento->imagem}}) no-repeat center center fixed;
-                -webkit-background-size: cover;
-                -moz-background-size: cover;
-                -o-background-size: cover;
+                style="background: url({{ asset('uploadsDoUsuario/')}}/{{!empty($evento->imagem) ? $evento->imagem : 'eventoDefault.jpg'}}) center center ;
                 background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
                 height:190px;
                 ">
                   <!-- <h3 class="widget-user-username">{{$evento->titulo}}</h3>
@@ -117,7 +116,7 @@
                   </span>
                 </div>
               </div>
-              <div class="info-box bg-green">
+              <!-- <div class="info-box bg-green">
                 <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Curtidas</span>
@@ -129,7 +128,7 @@
                     Cresceu 70% em 30 dias
                   </span>
                 </div>
-              </div>
+              </div> -->
               <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Participantes x Cursos</h3>
