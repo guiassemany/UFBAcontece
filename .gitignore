@@ -5,7 +5,7 @@ Homestead.json
 .env
 /public/uploadsDoUsuario/*.jpg
 /public/uploadsDoUsuario/perfil/*.jpg
-
+!/public/uploadsDoUsuario/eventoDefault.jpg
 *.iml
 
 ## Directory-based project format:
