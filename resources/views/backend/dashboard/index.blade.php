@@ -41,7 +41,7 @@
                     </li>
                   </ul>
 
-                  <a href="#" class="btn btn-primary btn-block"><b>Publicar Evento</b></a>
+                  <a href="{{action('BackendController@cadastrarEvento')}}" class="btn btn-primary btn-block"><b>Publicar Evento</b></a>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
 
