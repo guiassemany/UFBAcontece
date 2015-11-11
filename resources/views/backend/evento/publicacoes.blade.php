@@ -28,7 +28,7 @@
                   <div class="timeline-item">
                     <span class="time"><i class="fa fa-clock-o"></i> {{ $publicacao->present()->createdAtFormatada }}</span>
                     <span class="time"><i class="fa fa-thumbs-o-up"></i> {{ count($publicacao->curtidas) }}</span>
-                    <h3 class="timeline-header"><a href="#">{{ $publicacao->usuario->nome }}</a> publicou</h3>
+                    <h3 class="timeline-header"><a href="{{action('Backend\UserController@show', $publicacao->usuario->id)}}">{{ $publicacao->usuario->nome }}</a> publicou</h3>
                     <div class="timeline-body">
                       {{ $publicacao->texto }}
                     </div>

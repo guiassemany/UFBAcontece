@@ -57,6 +57,9 @@ Route::group(['prefix' => 'painel'], function () {
       Route::get('/participante/{eventoId}/confirmar', 'Backend\ParticipantesController@store');
       Route::get('/participante/{eventoId}/cancelar', 'Backend\ParticipantesController@destroy');
 
+      //Ver Perfil do usuário
+      Route::get('/perfil/{idUsuario}', 'Backend\UserController@show');
+
       //Faz o Logout
       Route::get('auth/logout', 'Backend\Auth\AuthController@getLogout');
 

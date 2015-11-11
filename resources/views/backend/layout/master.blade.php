@@ -54,7 +54,7 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Eventos pendentes -->
-              <li class="dropdown tasks-menu">
+              <!-- <li class="dropdown tasks-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-flag-o"></i>
                   <span class="label label-danger">9</span>
@@ -62,9 +62,8 @@
                 <ul class="dropdown-menu">
                   <li class="header">Existem 9 eventos pendentes</li>
                   <li>
-                    <!-- inner menu: contains the actual data -->
                     <ul class="menu">
-                      <li><!-- Task item -->
+                      <li>
                         <a href="#">
                           <h3>
                             Evento x
@@ -76,14 +75,14 @@
                             </div>
                           </div>
                         </a>
-                      </li><!-- end task item -->
+                      </li>
                     </ul>
                   </li>
                   <li class="footer">
                     <a href="#">Ver todos os eventos</a>
                   </li>
                 </ul>
-              </li>
+              </li> -->
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -109,7 +108,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                      <a href="{{action('Backend\UserController@show', Auth::user()->id)}}" class="btn btn-default btn-flat">Perfil</a>
                     </div>
                     <div class="pull-right">
                       <a href="{{ action('Backend\Auth\AuthController@getLogout') }}" class="btn btn-default btn-flat">Sair</a>

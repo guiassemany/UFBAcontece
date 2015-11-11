@@ -42,7 +42,7 @@
 
         <div class="comment-text">
           <span class="username">
-            {{ $comentario->usuario->nome }}
+            <a href="{{action('Backend\UserController@show', $comentario->usuario->id)}}">{{ $comentario->usuario->nome }}</a>
             @if(Auth::user()->id == $comentario->usuario_id)
             <a type="button" href="{{ action('Backend\ComentariosController@destroy', $comentario->id) }}" class="btn btn-sm  btn-flat pull-right">
               <i class="fa fa-trash"></i>

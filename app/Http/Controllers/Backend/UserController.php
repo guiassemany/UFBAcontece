@@ -96,4 +96,9 @@ class UserController extends Controller
     {
         //
     }
+
+    public function show($id){
+        $usuario = User::findOrFail($id);
+        return view('backend.perfil.index', compact('usuario'));
+    }
 }

@@ -32,7 +32,7 @@
                   @else
                     <img class="profile-user-img img-responsive img-circle" src="{{ asset('dist/img/usuario.jpg') }}" alt="Foto do perfil">
                   @endif
-                  <h3 class="profile-username text-center">{{ Auth::user()->nome }}</h3>
+                  <h3 class="profile-username text-center"><a href="{{action('Backend\UserController@show', Auth::user()->id)}}">{{ Auth::user()->nome }}</a></h3>
                   <p class="text-muted text-center">{{ Auth::user()->email }}</p>
 
                   <ul class="list-group list-group-unbordered">
