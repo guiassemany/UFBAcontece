@@ -18,6 +18,8 @@ class UserTableSeeder extends Seeder
           'admin' => 'Y',
           'curso_id' => 15,
           'unidade_id' => 1,
+          'created_at' => '2015-01-01 17:00:00',
+          'updated_at' => '2015-01-01 17:00:00',
       ]);
 
       DB::table('usuarios')->insert([
@@ -27,6 +29,8 @@ class UserTableSeeder extends Seeder
           'admin' => 'Y',
           'curso_id' => 15,
           'unidade_id' => 1,
+          'created_at' => '2015-01-01 17:00:00',
+          'updated_at' => '2015-01-01 17:00:00',
       ]);
 
       DB::table('usuarios')->insert([
@@ -36,6 +40,8 @@ class UserTableSeeder extends Seeder
           'admin' => 'Y',
           'curso_id' => 15,
           'unidade_id' => 1,
+          'created_at' => '2015-01-01 17:00:00',
+          'updated_at' => '2015-01-01 17:00:00',
       ]);
 
       DB::table('usuarios')->insert([
@@ -45,6 +51,8 @@ class UserTableSeeder extends Seeder
           'admin' => 'Y',
           'curso_id' => 15,
           'unidade_id' => 1,
+          'created_at' => '2015-01-01 17:00:00',
+          'updated_at' => '2015-01-01 17:00:00',
       ]);
 
       DB::table('usuarios')->insert([
@@ -54,6 +62,8 @@ class UserTableSeeder extends Seeder
           'admin' => 'Y',
           'curso_id' => 15,
           'unidade_id' => 1,
+          'created_at' => '2015-01-01 17:00:00',
+          'updated_at' => '2015-01-01 17:00:00',
       ]);
 
       DB::table('usuarios')->insert([
@@ -63,6 +73,8 @@ class UserTableSeeder extends Seeder
           'admin' => 'N',
           'curso_id' => 3,
           'unidade_id' => 2,
+          'created_at' => '2015-01-01 17:00:00',
+          'updated_at' => '2015-01-01 17:00:00',
       ]);
 
       DB::table('usuarios')->insert([
@@ -72,6 +84,8 @@ class UserTableSeeder extends Seeder
           'admin' => 'N',
           'curso_id' => 5,
           'unidade_id' => 3,
+          'created_at' => '2015-01-01 17:00:00',
+          'updated_at' => '2015-01-01 17:00:00',
       ]);
 
       DB::table('usuarios')->insert([
@@ -81,6 +95,8 @@ class UserTableSeeder extends Seeder
           'admin' => 'N',
           'curso_id' => 5,
           'unidade_id' => 2,
+          'created_at' => '2015-01-01 17:00:00',
+          'updated_at' => '2015-01-01 17:00:00',
       ]);
 
       DB::table('usuarios')->insert([
@@ -90,6 +106,8 @@ class UserTableSeeder extends Seeder
           'admin' => 'N',
           'curso_id' => 1,
           'unidade_id' => 1,
+          'created_at' => '2015-01-01 17:00:00',
+          'updated_at' => '2015-01-01 17:00:00',
       ]);
 
        //Gera usuários random com o Faker
@@ -104,6 +122,8 @@ class UserTableSeeder extends Seeder
                 'admin' => 'N',
                 'curso_id' => $faker->numberBetween($min = 1, $max = 15),
                 'unidade_id' => $faker->numberBetween($min = 1, $max = 6),  
+                'created_at' => $faker->dateTimeThisMonth($max = 'now'),
+                'updated_at' => $faker->dateTimeThisMonth($max = 'now'),
             ]);  
         }
 

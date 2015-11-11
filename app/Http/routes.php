@@ -60,6 +60,10 @@ Route::group(['prefix' => 'painel'], function () {
       //Ver Perfil do usuário
       Route::get('/perfil/{idUsuario}', 'Backend\UserController@show');
 
+      //Ver e Pesquisar Usuários
+      Route::get('/usuarios', 'Backend\UserController@index');
+      Route::post('/usuarios', 'Backend\UserController@index');
+
       //Faz o Logout
       Route::get('auth/logout', 'Backend\Auth\AuthController@getLogout');
 

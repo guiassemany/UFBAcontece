@@ -259,7 +259,7 @@
               defaultView: 'agendaWeek',
               defaultDate: '{{$evento->data_inicio}}',
               minTime: '07:00:00',
-              maxTime: '20:00:00',
+              maxTime: '22:00:00',
               allDaySlot: false,
               buttonText: {
                 today: 'Hoje',

@@ -160,6 +160,11 @@
                 <i class="fa fa-heart"></i> <span>Presenças Confirmadas</span>
               </a>
             </li>
+            <li class="treeview">
+              <a href="{{ action('Backend\UserController@index') }}">
+                <i class="fa fa-group"></i> <span>Buscar Usuários</span>
+              </a>
+            </li>
             @if(Auth::user()->isAdmin())
             <li class="header">Menu do Administrador</li>
             <li class="treeview">

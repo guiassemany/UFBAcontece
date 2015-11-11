@@ -20,9 +20,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //dd($request->input('termoPesquisa'));
+        if(!empty($request->input('termoPesquisa')))
+        {
+            $usuarios = User::where('nome', 'LIKE', '%'.$request->input('termoPesquisa').'%')->orderBy('nome')->paginate(15);
+        }else{
+            $usuarios = User::orderBy('nome')->paginate(30);
+        }
+        return view('backend.usuarios.index', compact('usuarios'));
     }
 
     /**
