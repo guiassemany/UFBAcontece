@@ -97,7 +97,12 @@
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="{{ asset('dist/img/usuario.jpg') }}" class="img-circle" alt="User Image">
+                    @if(!empty(Auth::user()->foto))
+                      <img src="{{ asset('uploadsDoUsuario/perfil/')}}/{{Auth::user()->foto}}" class="img-circle" alt="Foto do Perfil">
+                    @else
+                      <img src="{{ asset('dist/img/usuario.jpg') }}" class="img-circle" alt="Sem foto do perfil">
+                    @endif
+
                     <p>
                       {{ Auth::user()->nome }}
                       @if(Auth::user()->isAdmin())

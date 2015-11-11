@@ -103,7 +103,7 @@
                       @if(!empty($usuario->foto))
                         <img src="{{ asset('uploadsDoUsuario/perfil/')}}/{{$usuario->foto}}" alt="Foto do Perfil">
                       @else
-                        <img src="{{ asset('dist/img/usuario.jpg') }}" alt="Foto do Perfil">
+                        <img src="{{ asset('dist/img/usuario.jpg') }}" style="width: 200px" alt="Foto do Perfil">
                       @endif
                       <a class="users-list-name" href="{{ action('Backend\UserController@show', $usuario->id) }}">{{ $usuario->nome }}</a>
                       <span class="users-list-date">Cadastrado desde {{ $usuario->present()->createdAtFormatada }}</span>
@@ -121,13 +121,9 @@
 
 
                 </div><!-- /.tab-content -->
-              
+
             </div><!-- /.col -->
           </div><!-- /.row -->
 
         </section>
 @endsection
-
-
-
-
