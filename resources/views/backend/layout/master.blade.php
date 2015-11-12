@@ -173,6 +173,11 @@
             @if(Auth::user()->isAdmin())
             <li class="header">Menu do Administrador</li>
             <li class="treeview">
+              <a href="{{ action('Backend\EstatisticasController@index') }}">
+                <i class="fa fa-line-chart"></i> <span>Estatisticas</span>
+              </a>
+            </li>
+            <li class="treeview">
               <a href="{{ action('Backend\EventosController@index') }}">
                 <i class="fa fa-calendar"></i> <span>Eventos</span>
               </a>

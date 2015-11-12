@@ -93,6 +93,9 @@ Route::group(['prefix' => 'painel'], function () {
       Route::get('/categorias/excluir/{id}', 'Backend\CategoriasController@destroy');
       Route::post('/categorias/editar/{id}', 'Backend\CategoriasController@update');
 
+      //Estatísticas
+      Route::get('/estatisticas', 'Backend\EstatisticasController@index');
+
     });
 
 

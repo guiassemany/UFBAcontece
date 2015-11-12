@@ -25,9 +25,9 @@ class UserController extends Controller
         //dd($request->input('termoPesquisa'));
         if(!empty($request->input('termoPesquisa')))
         {
-            $usuarios = User::where('nome', 'LIKE', '%'.$request->input('termoPesquisa').'%')->orderBy('nome')->paginate(15);
+            $usuarios = User::where('nome', 'LIKE', '%'.$request->input('termoPesquisa').'%')->orderBy('nome')->paginate(10);
         }else{
-            $usuarios = User::orderBy('nome')->paginate(30);
+            $usuarios = User::orderBy('nome')->paginate(10);
         }
         return view('backend.usuarios.index', compact('usuarios'));
     }

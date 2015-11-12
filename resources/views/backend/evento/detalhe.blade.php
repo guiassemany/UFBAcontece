@@ -269,6 +269,9 @@
               },
               //Random default events
               events: eventosCal,
+              eventRender: function(event, element) {
+                  $(element).tooltip({title: event.title, placement: 'auto'});
+              },
               editable: false,
               droppable: false,
             });
