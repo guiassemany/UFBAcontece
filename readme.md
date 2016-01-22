@@ -1,5 +1,7 @@
 # UFBAcontece
 
+![UFBAconteceFront](https://raw.github.com/guiassemany/UFBAcontece/master/Documentação/imagens/frontend.png)
+
 ---
 ## Requisitos
 * Composer
@@ -38,4 +40,4 @@ DB_USERNAME=homestead   # Usuário do Banco
 DB_PASSWORD=secret      # Senha do Banco
 ```
 
-##### Universidade Federal da Bahia 
+##### Universidade Federal da Bahia
