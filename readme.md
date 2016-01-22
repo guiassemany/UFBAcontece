@@ -1,6 +1,6 @@
 # UFBAcontece
 
-![UFBAconteceFront](https://raw.github.com/guiassemany/UFBAcontece/master/Documentação/imagens/frontend.png)
+![UFBAconteceFront](https://raw.github.com/guiassemany/UFBAcontece/master/Documentação/Imagens/frontend.png)
 
 ---
 ## Requisitos
