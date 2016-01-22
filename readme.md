@@ -40,4 +40,13 @@ DB_USERNAME=homestead   # Usuário do Banco
 DB_PASSWORD=secret      # Senha do Banco
 ```
 
+### Outras Imagens
+Login            |  Dashboard
+:-------------------------:|:-------------------------:
+![UFBAconteceFront](https://raw.github.com/guiassemany/UFBAcontece/master/Documentação/Imagens/login.png)  |  ![UFBAconteceFront](https://raw.github.com/guiassemany/UFBAcontece/master/Documentação/Imagens/dash2.png)
+
+Edição de Perfil            |  Busca de Usuários
+:-------------------------:|:-------------------------:
+![UFBAconteceFront](https://raw.github.com/guiassemany/UFBAcontece/master/Documentação/Imagens/dash1.png)  |  ![UFBAconteceFront](https://raw.github.com/guiassemany/UFBAcontece/master/Documentação/Imagens/dash3.png)
+
 ##### Universidade Federal da Bahia
